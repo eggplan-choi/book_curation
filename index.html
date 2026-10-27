@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>바이브 코딩의 시대, 우리는 어떤 삶을 살아야 하는가</title>
+  <style>
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-sub: #334155;
+      --text-muted: #64748b;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --accent-badge: #eff6ff;
+      --border-color: #e2e8f0;
+      --quote-bg: #f8fafc;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.7;
+      word-break: keep-all;
+      padding: 32px 16px 80px;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* 멘토링 인트로 헤더 */
+    .intro-header {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      margin-bottom: 36px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    @media (min-width: 768px) {
+      .intro-header {
+        padding: 40px 36px;
+      }
+    }
+
+    .intro-tag {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      background-color: var(--accent-badge);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+
+    .main-title {
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.4;
+      color: #0f172a;
+      margin-bottom: 18px;
+    }
+
+    @media (min-width: 768px) {
+      .main-title {
+        font-size: 1.85rem;
+      }
+    }
+
+    .intro-body {
+      font-size: 1rem;
+      color: var(--text-sub);
+      line-height: 1.75;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .intro-body strong {
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .intro-highlight {
+      border-left: 3px solid var(--primary);
+      padding-left: 14px;
+      margin-top: 6px;
+      color: var(--primary-hover);
+      font-weight: 600;
+      font-size: 1.02rem;
+    }
+
+    /* 도서 카드 리스트 */
+    .book-list {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .book-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .book-card {
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 32px;
+      }
+    }
+
+    /* 표지 영역 */
+    .book-cover-wrap {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .book-cover-wrap {
+        width: 210px;
+      }
+    }
+
+    .book-cover {
+      width: 100%;
+      max-width: 210px;
+      aspect-ratio: 1 / 1.45;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+      border: 1px solid var(--border-color);
+      background-color: #eee;
+    }
+
+    /* 구매 링크 버튼 */
+    .buy-link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      max-width: 210px;
+      padding: 12px 14px;
+      background-color: var(--primary);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: background-color 0.2s ease, transform 0.1s ease;
+      text-align: center;
+    }
+
+    .buy-link-btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .buy-link-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* 본문 정보 영역 */
+    .book-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .book-header {
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 14px;
+    }
+
+    .book-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      background-color: var(--accent-badge);
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+
+    .book-title {
+      font-size: 1.35rem;
+      font-weight: 750;
+      color: #0f172a;
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+
+    .book-author {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    /* 섹션 공통 */
+    .section-block {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .section-title {
+      font-size: 1.02rem;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .intro-text {
+      background-color: var(--quote-bg);
+      border-left: 4px solid var(--primary);
+      padding: 14px 16px;
+      border-radius: 4px 8px 8px 4px;
+      font-size: 0.95rem;
+      color: var(--text-sub);
+      line-height: 1.65;
+    }
+
+    /* 추천 대상 리스트 */
+    .recommend-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .recommend-item {
+      background: #fafafa;
+      border: 1px solid #f1f5f9;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 0.93rem;
+      color: var(--text-sub);
+      line-height: 1.55;
+    }
+
+    .recommend-type {
+      font-weight: 700;
+      color: #0f172a;
+      margin-right: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- 멘토링 의도 및 타이틀 헤더 -->
+    <header class="intro-header">
+      <span class="intro-tag">멘토링 생각 거리</span>
+      <h1 class="main-title">바이브 코딩의 시대,<br>우리는 어떤 삶을 살아야 하는가?</h1>
+      <div class="intro-body">
+        <p>
+          AI에게 몇 마디 건네면 그럴듯한 코드와 결과물이 순식간에 완성되는 '바이브 코딩'이 보편화되고 있습니다. 누구나 쉽게 결과물을 만들어낼 수 있게 되면서, 역설적으로 <strong>문제를 붙잡고 치열하게 고민하던 '과정의 가치'</strong>는 점점 희미해지고 있습니다.
+        </p>
+        <p>
+          결과물이 흔해진 세상에서, 우리는 어떤 방향으로 실력을 쌓고 무엇을 지키며 살아가야 할까요? 기술의 속도에 휩쓸리지 않고 스스로의 답을 함께 찾아보기 위해 두 권의 책을 제안합니다.
+        </p>
+        <div class="intro-highlight">
+          지금 내게 더 울림을 주는 질문을 품은 책을 골라 읽어봅시다.
+        </div>
+      </div>
+    </header>
+
+    <!-- 도서 목록 -->
+    <main class="book-list">
+      <!-- 1번 도서: AI 시대 어떻게 일할 것인가 -->
+      <article class="book-card">
+        <div class="book-cover-wrap">
+          <img src="cover1.jpg" alt="AI 시대 어떻게 일할 것인가 표지" class="book-cover" loading="lazy">
+          <a href="https://product.kyobobook.co.kr/detail/S000220844236" target="_blank" rel="noopener noreferrer" class="buy-link-btn">
+            교보문고에서 확인하기 ↗
+          </a>
+        </div>
+
+        <div class="book-content">
+          <div class="book-header">
+            <span class="book-tag">기본기 & 본질</span>
+            <h2 class="book-title">AI 시대 어떻게 일할 것인가</h2>
+            <p class="book-author">저자: 최동원 · 상상스퀘어</p>
+          </div>
+
+          <div class="section-block">
+            <h3 class="section-title">📌 어떤 책인가요?</h3>
+            <div class="intro-text">
+              "AI한테 시켜서 멋진 앱이나 게임을 5분 만에 완성하면 순간 내가 천재 개발자가 된 것 같은 기분이 들 거야. 이걸 이 책에서는 ‘생산성의 착시 현상’이라고 불러. 도구가 좋은 건데 내 실력으로 착각하게 된다는 거지. 편리함에 취해 복사·붙여넣기만 하다 보면 생각하는 근육이 다 녹아내릴지도 몰라. 이 책은 기술의 화려한 겉모습에 속지 않고, 나만의 '진짜 실력'과 무기를 단단하게 지켜내는 영리한 생존법을 담고 있어."
+            </div>
+          </div>
+
+          <div class="section-block">
+            <h3 class="section-title">🙋 이런 친구들에게 추천해요!</h3>
+            <ul class="recommend-list">
+              <li class="recommend-item">
+                <span class="recommend-type">• 복사·붙여넣기 중독형:</span>
+                에러가 나면 스스로 고민하기보다 무조건 AI한테 "다시 짜줘"라고만 하며 깊이 생각하기를 귀찮아하는 학생
+              </li>
+              <li class="recommend-item">
+                <span class="recommend-type">• 미래 불안형 평범이:</span>
+                "어차피 AI가 다 하는데 내가 공부를 더 해서 뭐 하나"라는 생각에 빠져 진로나 학업 동기를 잃어가는 학생
+              </li>
+              <li class="recommend-item">
+                <span class="recommend-type">• 성실한 노력파:</span>
+                요령 피우지 않고 기본기부터 탄탄하게 쌓아서 AI 시대에도 대체 불가능한 '찐 전문가'가 되고 싶은 학생
+              </li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2번 도서: 더 퍼지, AI 시대 누가 미래를 이끄는가 -->
+      <article class="book-card">
+        <div class="book-cover-wrap">
+          <img src="cover2.jpg" alt="더 퍼지, AI 시대 누가 미래를 이끄는가 표지" class="book-cover" loading="lazy">
+          <a href="https://product.kyobobook.co.kr/detail/S000214664165" target="_blank" rel="noopener noreferrer" class="buy-link-btn">
+            교보문고에서 확인하기 ↗
+          </a>
+        </div>
+
+        <div class="book-content">
+          <div class="book-header">
+            <span class="book-tag">감성 & 인문학적 통찰</span>
+            <h2 class="book-title">더 퍼지, AI 시대 누가 미래를 이끄는가</h2>
+            <p class="book-author">저자: 한지우 · 미디어숲</p>
+          </div>
+
+          <div class="section-block">
+            <h3 class="section-title">📌 어떤 책인가요?</h3>
+            <div class="intro-text">
+              "전 세계 모든 사람이 똑같은 고성능 AI를 쓰면 기술적 수준은 다 비슷해질 거야. 그때부터는 기술 경쟁이 아니라 '누가 더 사람 마음을 잘 아는가'의 경쟁이지. 딱 떨어지는 데이터(Crisp)는 AI가 천재지만, 미묘한 감정과 스토리 같은 모호한 영역(Fuzzy)은 오직 인간만 채울 수 있거든. 네 기술에 인간적인 매력과 유니크한 가치를 한 스푼 얹는 법을 알려줄게."
+            </div>
+          </div>
+
+          <div class="section-block">
+            <h3 class="section-title">🙋 이런 친구들에게 추천해요!</h3>
+            <ul class="recommend-list">
+              <li class="recommend-item">
+                <span class="recommend-type">• 감성 아티스트형:</span>
+                코딩이나 기술 자체보다 디자인, UI/UX, 게임 스토리 기획, 사람들의 심리나 반응에 더 흥미를 느끼는 학생
+              </li>
+              <li class="recommend-item">
+                <span class="recommend-type">• 인문학·사회 관심형:</span>
+                평소에 책 읽기나 글쓰기를 좋아하고, 기술이 인간 사회와 우리 삶을 어떻게 바꿀지 호기심이 많은 학생
+              </li>
+              <li class="recommend-item">
+                <span class="recommend-type">• 아이디어 뱅크형:</span>
+                기술적인 기본기는 조금 부족할지 몰라도 "이런 앱 만들면 대박 나겠다" 같은 엉뚱하고 기발한 상상을 잘하는 학생
+              </li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+
+</body>
+</html>
